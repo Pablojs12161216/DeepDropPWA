@@ -405,7 +405,7 @@ selectorProvincia.addEventListener("change", function () {
 /*    CONVERTIR EN PWA   */
 /*=======================*/
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/DeepDropPWA/sw.js')
+  navigator.serviceWorker.register('./sw.js')
     .then(() => console.log('SW registrado'))
     .catch(err => console.error(err));
 }
