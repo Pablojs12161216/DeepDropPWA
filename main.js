@@ -404,32 +404,10 @@ selectorProvincia.addEventListener("change", function () {
 /*=======================*/
 /*    CONVERTIR EN PWA   */
 /*=======================*/
-const CACHE_NAME = 'mi-webapp-cache-v1';
-const urlsToCache = [
-  '/',
-  '/main.html',
-  '/style.css',
-  '/main.js',
-  '/icon-192.png',
-  '/icon-512.png'
-];
-
-// Instalación
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(urlsToCache))
-  );
-});
-
-// Activación
-self.addEventListener('activate', event => {
-  console.log('Service Worker activado');
-});
-
-// Fetch (sirve archivos cacheados)
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request).then(response => response || fetch(event.request))
-  );
-});
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('SW registrado:', reg))
+      .catch(err => console.error('Error al registrar SW:', err));
+  });
+}
