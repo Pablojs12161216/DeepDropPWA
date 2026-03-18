@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Datos Meteorológicos</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="manifest" href="manifest.json">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+  <!-- NAVBAR TABLET Y PC -->
+  <nav class="navbar">
+    <a href="#" class="logo"><img src="img/Logo.png" alt="Logo Empresa" /></a>
+    <div class="nav-left">
+      <a id="datosMeteoBtn">Datos meteorológicos</a>
+      <a id="datosSensoresBtn" style="visibility: hidden;">Datos de sensores</a>
+    </div>
+    <div class="nav-right" id="navRight">
+      <a id="botonIniciarSesion">Iniciar sesión</a>
+      <a id="botonRegistrarse">Registrarse</a>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL (CARDS) -->
+  <div id="contenido-principal">
+
+    <div class="main">
+      <div class="card">
+        <div class="image"><img src="img/Quienes.webp" alt=""></div>
+        <div class="content">
+          <a href="#">
+            <span class="title">¿Quiénes somos?</span>
+          </a>
+          <p class="desc">
+            En DeepDrop somos una empresa dedicada a la monitorización agrícola mediante tecnología aplicada al campo.
+            Trabajamos directamente sobre las parcelas, instalando sensores que permiten conocer en tiempo real el
+            estado
+            del suelo y las condiciones ambientales.
+          </p>
+          <p class="desc">
+            Nacimos con la idea de acercar la tecnología al agricultor de forma sencilla y útil, sin complicaciones
+            técnicas, ofreciendo información clara que ayude a tomar mejores decisiones en el día a día.
+          </p>
+          <a class="action" href="#">Find out more <span aria-hidden="true"> → </span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="image"><img src="img/Mision.jpeg" alt=""></div>
+        <div class="content">
+          <a href="#">
+            <span class="title">Nuestra misión</span>
+          </a>
+          <p class="desc">
+            Nuestra misión es ayudar a los agricultores a gestionar sus cultivos con mayor precisión, optimizando el uso
+            del agua y mejorando la eficiencia de cada explotación.
+          </p>
+          <p class="desc">
+            Creemos que disponer de datos fiables y comprensibles permite anticiparse, reducir costes y aumentar el
+            rendimiento sin depender únicamente de la intuición o de factores externos imprevisibles.
+          </p>
+          <a class="action" href="#">Find out more <span aria-hidden="true"> → </span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="image"><img src="img/Vision.jpg" alt=""></div>
+        <div class="content">
+          <a href="#">
+            <span class="title">Nuestra visión</span>
+          </a>
+          <p class="desc">
+            Queremos formar parte de una agricultura más moderna, sostenible y basada en datos reales. Apostamos por un
+            modelo en el que la tecnología sea una herramienta accesible para todos, independientemente del tamaño de
+            la explotación.
+          </p>
+          <p class="desc">
+            Visualizamos un sector agrícola donde cada decisión esté respaldada por información precisa y actualizada.
+          </p>
+          <a class="action" href="#">Find out more <span aria-hidden="true"> → </span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="image"><img src="img/Hacemos.webp" alt=""></div>
+        <div class="content">
+          <a href="#">
+            <span class="title">¿Qué hacemos?</span>
+          </a>
+          <p class="desc">
+            En DeepDrop ofrecemos:
+          <ul>
+            <li>Instalación de sensores de humedad y temperatura en suelo.</li>
+            <li>Recogida automática de datos en diferentes profundidades.</li>
+            <li>Integración con datos meteorológicos oficiales.</li>
+            <li>Plataforma online para visualizar lecturas en tiempo real e históricos.</li>
+            <li>Asesoramiento técnico para interpretar la información.</li>
+          </ul>
+          </p>
+          <p class="desc">
+            Nuestro objetivo no es solo recoger datos, sino convertirlos en conocimiento útil.
+          </p>
+          <a class="action" href="#">Find out more <span aria-hidden="true"> → </span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="image"><img src="img/Trabajamos.webp" alt=""></div>
+        <div class="content">
+          <a href="#">
+            <span class="title">Cómo trabajamos</span>
+          </a>
+          <p class="desc">
+            Nuestro proceso es sencillo y transparente:
+          <ol>
+            <li>Analizamos las necesidades de la parcela.</li>
+            <li>Instalamos los sensores en los puntos estratégicos.</li>
+            <li>Recogemos y procesamos los datos automáticamente.</li>
+            <li>El agricultor accede a la información desde nuestra plataforma.</li>
+          </ol>
+          </p>
+          <p class="desc">
+            Además, ofrecemos acompañamiento para que la interpretación de los datos sea clara y práctica.
+          </p>
+          <a class="action" href="#">Find out more <span aria-hidden="true"> → </span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="image"><img src="img/Elegir.jpg" alt=""></div>
+        <div class="content">
+          <a href="#">
+            <span class="title">¿Por qué elegir DeepDrop?</span>
+          </a>
+          <p class="desc">
+            Porque combinamos experiencia en agricultura y tecnología para ofrecer soluciones reales y adaptadas a cada
+            explotación.
+          </p>
+          <p class="desc">
+            Datos en tiempo real, información clara y organizada, plataforma accesible desde cualquier lugar y atención
+            cercana y profesional.
+          </p>
+          <p class="desc">
+            Nuestro objetivo es ayudarte a tomar decisiones con mayor seguridad y tranquilidad.
+          </p>
+          <a class="action" href="#">Find out more <span aria-hidden="true"> → </span></a>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- FIN contenido-principal -->
+
+  <!-- DATOS METEOROLÓGICOS -->
+  <div id="datosMeteorologicos" class="cardDatos" style="display: none; margin-top: 20px;">
+    <h2 id="titulo-estacion" class="titulo">Observación Meteorológica</h2>
+
+    <!-- SELECT PROVINCIA -->
+    <select id="selector-provincia" class="selector">
+      <option value="">Selecciona una provincia</option>
+    </select>
+
+    <select id="selector-estacion" class="selector" disabled>
+      <option value="">Selecciona una estación</option>
+    </select>
+
+    <br><br><br>
+
+    <div id="datos-meteo">Selecciona una estación...</div>
+
+    <div style="width: 1000px; margin: 0 auto; margin-top: 50px; display:none;" id="grafico-contenedor">
+      <canvas id="grafico"></canvas>
+    </div>
+  </div>
+
+  <!-- MODAL LOGIN -->
+  <div id="modalLogin" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Iniciar Sesión</h3>
+      <div id="loginError" class="error-msg"></div>
+      <form id="loginForm">
+        <label for="loginEmail">Correo electrónico</label>
+        <input type="email" id="loginEmail" placeholder="ejemplo@gmail.com" />
+        <label for="loginPassword">Contraseña</label>
+        <div class="input-eye">
+          <input type="password" id="loginPassword" placeholder="Contraseña" />
+          <img src="img/ojo.png" alt="Mostrar contraseña" id="loginOjo" />
+        </div>
+        <button type="button">Iniciar Sesión</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL SIGNUP -->
+  <div id="modalSignup" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Registro</h3>
+      <div id="signupError" class="error-msg"></div>
+      <form id="signupForm">
+        <label for="signupNombre">Nombre</label>
+        <input type="text" id="signupNombre" />
+        <label for="signupApellidos">Apellidos</label>
+        <input type="text" id="signupApellidos" />
+        <label for="signupEmail">Correo electrónico</label>
+        <input type="email" id="signupEmail" />
+        <label for="signupPassword">Contraseña</label>
+        <div class="input-eye">
+          <input type="password" id="signupPassword" />
+          <img src="img/ojo.png" alt="Mostrar contraseña" id="signupOjo" />
+        </div>
+        <label for="signupPasswordRepetir">Repetir contraseña</label>
+        <div class="input-eye">
+          <input type="password" id="signupPasswordRepetir" />
+          <img src="img/ojo.png" alt="Mostrar contraseña" id="signupOjo2" />
+        </div>
+        <label for="signupTelefono">Teléfono</label>
+        <input type="number" id="signupTelefono" />
+        <button type="button">Registrarse</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="./main.js"></script>
+</body>
+
+</html>

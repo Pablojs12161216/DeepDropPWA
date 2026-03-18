@@ -1,0 +1,147 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== BODY ===== */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #eaf4ff, #d8ecff);
+    color: #2c2c2c; /* negro suave */
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* ===== TÍTULO ===== */
+.titulo {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #1f2d3d; /* gris oscuro elegante */
+}
+
+.subtitulo {
+    font-size: 16px;
+    color: #4a6fa5; /* azul suave */
+    margin-top: 6px;
+}
+
+/* ===== SELECT ===== */
+.selector {
+    padding: 10px 15px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: 1px solid #c5dfff;
+    background-color: #ffffff;
+    color: #1f2d3d;
+    margin: 20px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.selector:hover {
+    border-color: #4a90e2;
+    box-shadow: 0 0 6px rgba(74, 144, 226, 0.3);
+}
+
+/* ===== TARJETA PRINCIPAL ===== */
+.card {
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: 0.3s ease;
+}
+
+/* ===== BLOQUE DATOS ===== */
+.datos {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* ===== CADA DATO ===== */
+.dato {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-radius: 10px;
+    background-color: #f2f8ff; /* azul muy suave */
+    transition: all 0.25s ease;
+}
+
+.dato:hover {
+    background-color: #e1f0ff;
+    transform: translateY(-2px);
+}
+
+/* ===== TEXTO LABEL ===== */
+.dato-label {
+    font-weight: 500;
+    color: #3a4f66;
+}
+
+/* ===== VALOR ===== */
+.dato-valor {
+    font-weight: 600;
+    color: #1f2d3d;
+}
+
+/* ===== LOADING ===== */
+.loading {
+    color: #4a90e2;
+    font-weight: 500;
+}
+
+.imagenes {
+    width: 50px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+
+    body {
+        padding: 16px 8px;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .dato {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+
+    .dato-label {
+        font-size: 13px;
+    }
+
+    .dato-valor {
+        font-size: 15px;
+    }
+
+    .titulo {
+        font-size: 24px;
+    }
+
+    .subtitulo {
+        font-size: 12px;
+    }
+
+    .selector {
+        font-size: 15px;
+        padding: 10px 14px;
+    }
+
+    .imagenes {
+        width: 35px;
+        height: 35px;
+    }
+}
