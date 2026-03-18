@@ -1,7 +1,7 @@
 {
   "name": "Mi Web App",
   "short_name": "WebApp",
-  "start_url": "main.html",
+  "start_url": "ttps://pablojs12161216.github.io/DeepDropPWA/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#007bff",
