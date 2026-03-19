@@ -1,6 +1,7 @@
 /* ========================= */
 /* MODALES LOGIN / SIGNUP */
 /* ========================= */
+const API_URL = "https://TU-NGROK.ngrok-free.app";
 const modalLogin = document.getElementById("modalLogin");
 const modalSignup = document.getElementById("modalSignup");
 const navRight = document.getElementById("navRight");
