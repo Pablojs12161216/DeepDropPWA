@@ -53,6 +53,7 @@ body {
 /* ================= SECCIÓN METEO ================= */
 #datosMeteorologicos {
     width: 100%;
+    box-sizing: border-box;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -359,6 +360,7 @@ button:hover {
 .main {
     padding: 15px;
     width: 100%;
+    box-sizing: border-box;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -590,16 +592,24 @@ ol {
 
     /* Ajuste de navbar y cabecera: evitar espacio blanco */
     .navbar {
-        flex-wrap: wrap;
-        /* permite que el contenido se ajuste */
+        flex-wrap: nowrap;
+        /* evita que el contenido baje a otra línea */
         justify-content: space-between;
-        padding: 10px 15px;
+        padding: 8px 5px;
     }
 
     .nav-left,
     .nav-right {
-        gap: 15px;
-        flex-wrap: wrap;
+        gap: 4px;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+    
+    .separador {
+        color: #FAFAFA;
+        font-size: 13px;
+        margin: 0 -2px;
+        user-select: none;
     }
 }
 
@@ -686,8 +696,8 @@ ol {
 
     .nav-left a,
     .nav-right a {
-        font-size: 15px;
-        padding: 6px 8px;
+        font-size: 12px;
+        padding: 4px 4px;
     }
 }
 

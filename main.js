@@ -17,31 +17,36 @@ function actualizarNavbar() {
 
   if (userId) {
     navRight.innerHTML = `
-      <span>Hola, ${nombre}</span>
-      <div class="menu-toggle" id="menuToggle">☰</div>
+      <span class="user-name">Hola, ${nombre}</span>
+      <div class="menu-toggle" id="menuToggle">&#9776;</div>
     `;
     datosSensoresBtn.style.visibility = "visible";
 
-// 👇 AÑADIR ESTO
-if (!document.getElementById("cerrarSesionMenu")) {
-  const logout = document.createElement("a");
-  logout.id = "cerrarSesionMenu";
-  logout.textContent = "Cerrar sesión";
-  document.querySelector(".nav-left").appendChild(logout);
+    // 👇 AÑADIR ESTO
+    if (!document.getElementById("cerrarSesionMenu")) {
+      const logout = document.createElement("a");
+      logout.id = "cerrarSesionMenu";
+      logout.textContent = "Cerrar sesión";
+      document.querySelector(".nav-left").appendChild(logout);
 
-  logout.addEventListener("click", () => {
-    localStorage.removeItem("user_id");
-    localStorage.removeItem("user_nombre");
-    location.reload();
-  });
-}
+      logout.addEventListener("click", () => {
+        localStorage.removeItem("user_id");
+        localStorage.removeItem("user_nombre");
+        location.reload();
+      });
+    }
   } else {
     navRight.innerHTML = `
       <a id="botonIniciarSesion">Iniciar sesión</a>
+      <span class="separador">|</span>
       <a id="botonRegistrarse">Registrarse</a>
     `;
     document.getElementById("botonIniciarSesion").addEventListener("click", () => modalLogin.classList.add("show"));
     document.getElementById("botonRegistrarse").addEventListener("click", () => modalSignup.classList.add("show"));
+  }
+  
+  if (typeof activarMenu === 'function') {
+    activarMenu();
   }
 }
 
@@ -203,9 +208,9 @@ function mostrarGrafico(data, tipo, label, color) {
         borderColor: color,
         backgroundColor: color + "33",
         tension: 0.3,
-        pointRadius: 8,     // puntos grandes visibles
-        pointHoverRadius: 10,  // puntos aún más grandes al tocar
-        pointHitRadius: 10   // área táctil más amplia en móvil
+        pointRadius: 4,     // tamaño visual de los puntos más estético
+        pointHoverRadius: 6,  // un poco más grandes al pasar el ratón
+        pointHitRadius: 20   // área invisible enorme para detectar toques en móvil
       }]
     },
     options: {
@@ -338,43 +343,18 @@ signupBtn.addEventListener("click", function () {
 /* ACTUALIZAR UI SEGUN SESIÓN */
 /* ========================= */
 function actualizarUI() {
-  function actualizarUI() {
-    const userNombre = localStorage.getItem("user_nombre");
-    const navRight = document.querySelector(".nav-right");
+  const userNombre = localStorage.getItem("user_nombre");
 
-    if (contenidoPrincipal) contenidoPrincipal.style.display = "block";
+  if (contenidoPrincipal) contenidoPrincipal.style.display = "block";
 
-    if (userNombre) {
-      navRight.innerHTML = `
-      <span>Hola, ${userNombre}</span> |
-      <a href="#" id="cerrarSesion">Cerrar sesión</a>
-    `;
-
-      datosBtn.style.display = "inline-block";
-      datosSensoresBtn.style.visibility = "visible"; // ✅ FIX
-
-      document.getElementById("cerrarSesion").addEventListener("click", (e) => {
-        e.preventDefault();
-        localStorage.removeItem("user_id");
-        localStorage.removeItem("user_nombre");
-        location.reload();
-      });
-
-      datosDiv.style.display = "none";
-
-    } else {
-      navRight.innerHTML = `
-      <a id="botonIniciarSesion">Iniciar sesión</a> |
-      <a id="botonRegistrarse">Registrarse</a>
-    `;
-
-      datosBtn.style.display = "none";
-      datosSensoresBtn.style.visibility = "hidden";
-      datosDiv.style.display = "none";
-
-      document.getElementById("botonIniciarSesion").onclick = () => modalLogin.classList.add("show");
-      document.getElementById("botonRegistrarse").onclick = () => modalSignup.classList.add("show");
-    }
+  if (userNombre) {
+    datosBtn.style.display = "inline-block";
+    datosSensoresBtn.style.visibility = "visible";
+    datosDiv.style.display = "none";
+  } else {
+    datosBtn.style.display = "none";
+    datosSensoresBtn.style.visibility = "hidden";
+    datosDiv.style.display = "none";
   }
 }
 
@@ -428,19 +408,6 @@ if ('serviceWorker' in navigator) {
 /* ========================= */
 /* MENÚ HAMBURGUESA */
 /* ========================= */
-
-function activarMenu() {
-  const menuToggle = document.getElementById("menuToggle");
-  const navLeft = document.querySelector(".nav-left");
-
-  if (menuToggle) {
-    menuToggle.addEventListener("click", () => {
-      navLeft.classList.toggle("active");
-    });
-  }
-}
-
-activarMenu();
 
 function cerrarMenu() {
   const navLeft = document.querySelector(".nav-left");
