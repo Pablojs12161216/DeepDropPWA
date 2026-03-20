@@ -333,8 +333,7 @@ button:hover {
 
 .card {
     padding: 10px;
-    flex: 1 1 calc(33.333% - 12px);
-    max-width: 400px;
+    flex: 1 1 calc(30%);
     border-radius: 0.5rem;
     background-color: #f8f8f8;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
@@ -454,8 +453,7 @@ ol {
         gap: 15px;
     }
     .card {
-        flex: 1 1 calc(50% - 15px);
-        max-width: 50%;
+        flex: 1 1 calc(45%);
     }
 }
 
