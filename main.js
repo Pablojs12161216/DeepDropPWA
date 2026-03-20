@@ -106,12 +106,12 @@ selector.addEventListener("change", cargarDatos);
 function cargarDatos() {
   const estacion = selector.value;
   const nombreEstacion = selector.options[selector.selectedIndex].text;
-  if (!estacion) { 
-    titulo.textContent = "Observación Meteorológica"; 
-    contenedor.innerHTML = "Selecciona una estación"; 
-    graficoCont.style.display = "none"; 
-    if (grafico) grafico.destroy(); 
-    return; 
+  if (!estacion) {
+    titulo.textContent = "Observación Meteorológica";
+    contenedor.innerHTML = "Selecciona una estación";
+    graficoCont.style.display = "none";
+    if (grafico) grafico.destroy();
+    return;
   }
 
   titulo.innerHTML = `Observación Meteorológica<div class="subtitulo">${nombreEstacion}</div>`;
@@ -187,51 +187,51 @@ function mostrarGrafico(data, tipo, label, color) {
   grafico = new Chart(canvas, {
     type: "line",
     data: {
-        labels,
-        datasets: [{
-            label,
-            data: valores,
-            borderColor: color,
-            backgroundColor: color + "33",
-            tension: 0.3,
-            pointRadius: 8,     // puntos grandes visibles
-            pointHoverRadius: 10,  // puntos aún más grandes al tocar
-            pointHitRadius: 10   // área táctil más amplia en móvil
-        }]
+      labels,
+      datasets: [{
+        label,
+        data: valores,
+        borderColor: color,
+        backgroundColor: color + "33",
+        tension: 0.3,
+        pointRadius: 8,     // puntos grandes visibles
+        pointHoverRadius: 10,  // puntos aún más grandes al tocar
+        pointHitRadius: 10   // área táctil más amplia en móvil
+      }]
     },
     options: {
-        responsive: true,
-        maintainAspectRatio: false, // usa altura CSS
-        interaction: {
-            mode: 'nearest',        // detectar el punto más cercano
-            axis: 'x',
-            intersect: true         // tooltip solo al tocar el punto exacto
+      responsive: true,
+      maintainAspectRatio: false, // usa altura CSS
+      interaction: {
+        mode: 'nearest',        // detectar el punto más cercano
+        axis: 'x',
+        intersect: true         // tooltip solo al tocar el punto exacto
+      },
+      plugins: {
+        legend: {
+          display: true,
+          labels: { font: { size: 18 } } // leyenda más grande
         },
-        plugins: {
-            legend: {
-                display: true,
-                labels: { font: { size: 18 } } // leyenda más grande
-            },
-            tooltip: {
-                enabled: true,
-                mode: 'nearest',
-                intersect: true,
-                bodyFont: { size: 18 },  // texto tooltip grande
-                titleFont: { size: 18 },
-                padding: 12
-            }
-        },
-        scales: {
-            y: { 
-                beginAtZero: true, 
-                ticks: { font: { size: 18 } } // números eje Y más grandes
-            },
-            x: { 
-                ticks: { font: { size: 18 } } // números eje X más grandes
-            }
+        tooltip: {
+          enabled: true,
+          mode: 'nearest',
+          intersect: true,
+          bodyFont: { size: 18 },  // texto tooltip grande
+          titleFont: { size: 18 },
+          padding: 12
         }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { font: { size: 18 } } // números eje Y más grandes
+        },
+        x: {
+          ticks: { font: { size: 18 } } // números eje X más grandes
+        }
+      }
     }
-});
+  });
 }
 
 /* ========================= */
@@ -314,7 +314,7 @@ signupBtn.addEventListener("click", function () {
 
         setTimeout(() => {
           modalSignup.classList.remove("show");
-          actualizarUI();
+          location.reload();
         }, 1000);
 
       } else {
@@ -329,10 +329,10 @@ signupBtn.addEventListener("click", function () {
 /* ACTUALIZAR UI SEGUN SESIÓN */
 /* ========================= */
 function actualizarUI() {
+  function actualizarUI() {
   const userNombre = localStorage.getItem("user_nombre");
   const navRight = document.querySelector(".nav-right");
 
-  // Mostrar siempre contenido principal
   if (contenidoPrincipal) contenidoPrincipal.style.display = "block";
 
   if (userNombre) {
@@ -340,8 +340,10 @@ function actualizarUI() {
       <span>Hola, ${userNombre}</span> |
       <a href="#" id="cerrarSesion">Cerrar sesión</a>
     `;
+
     datosBtn.style.display = "inline-block";
-    datosSensoresBtn.style.display = "visible";
+    datosSensoresBtn.style.visibility = "visible"; // ✅ FIX
+
     document.getElementById("cerrarSesion").addEventListener("click", (e) => {
       e.preventDefault();
       localStorage.removeItem("user_id");
@@ -349,7 +351,6 @@ function actualizarUI() {
       location.reload();
     });
 
-    // No mostrar datos meteorológicos automáticamente
     datosDiv.style.display = "none";
 
   } else {
@@ -357,7 +358,9 @@ function actualizarUI() {
       <a id="botonIniciarSesion">Iniciar sesión</a> |
       <a id="botonRegistrarse">Registrarse</a>
     `;
+
     datosBtn.style.display = "none";
+    datosSensoresBtn.style.visibility = "hidden";
     datosDiv.style.display = "none";
 
     document.getElementById("botonIniciarSesion").onclick = () => modalLogin.classList.add("show");
