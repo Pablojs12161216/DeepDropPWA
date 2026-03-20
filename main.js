@@ -414,3 +414,20 @@ if ('serviceWorker' in navigator) {
     .then(() => console.log('SW registrado'))
     .catch(err => console.error(err));
 }
+
+/* ========================= */
+/* MENÚ HAMBURGUESA */
+/* ========================= */
+
+const menuToggle = document.getElementById("menuToggle");
+const navLeft = document.querySelector(".nav-left");
+
+menuToggle.addEventListener("click", () => {
+  navLeft.classList.toggle("active");
+});
+
+document.querySelectorAll(".nav-left a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLeft.classList.remove("active");
+  });
+});
