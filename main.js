@@ -366,7 +366,7 @@ function actualizarUI() {
     document.getElementById("botonIniciarSesion").onclick = () => modalLogin.classList.add("show");
     document.getElementById("botonRegistrarse").onclick = () => modalSignup.classList.add("show");
   }
-}
+}}
 
 actualizarUI();
 
