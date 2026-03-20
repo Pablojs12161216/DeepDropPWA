@@ -554,11 +554,13 @@ ol {
     }
 
     .dato-label {
-        font-size: 16px;
+        font-size: 18px;
+        font-weight: 600;
     }
 
     .dato-valor {
-        font-size: 18px;
+        font-size: 20px;
+        font-weight: 700;
     }
 
     .imagenes {
@@ -588,7 +590,9 @@ ol {
 
     /* Ajuste de navbar y cabecera: evitar espacio blanco */
     .navbar {
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
+        /* permite que el contenido se ajuste */
+        justify-content: space-between;
         padding: 10px 15px;
     }
 
@@ -597,7 +601,6 @@ ol {
         gap: 15px;
         flex-wrap: wrap;
     }
-
 }
 
 /* ===== FIX MODALES MÓVIL ===== */
@@ -744,30 +747,5 @@ ol {
 
     .nav-right a {
         white-space: nowrap;
-    }
-}
-
-/* ===== RESTORE METEO ORIGINAL ===== */
-@media screen and (max-width: 768px) {
-
-    .dato {
-        padding: 12px;
-    }
-
-    .dato-label {
-        font-size: 14px;
-    }
-
-    .dato-valor {
-        font-size: 15px;
-    }
-
-    .imagenes {
-        width: 40px;
-        height: 40px;
-    }
-
-    #grafico-contenedor canvas {
-        height: auto !important;
     }
 }
