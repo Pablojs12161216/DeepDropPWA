@@ -441,3 +441,23 @@ function activarMenu() {
 }
 
 activarMenu();
+
+function cerrarMenu() {
+  const navLeft = document.querySelector(".nav-left");
+  if (navLeft) navLeft.classList.remove("active");
+}
+
+function activarMenu() {
+  const menuToggle = document.getElementById("menuToggle");
+  const navLeft = document.querySelector(".nav-left");
+
+  if (menuToggle && navLeft) {
+    menuToggle.addEventListener("click", () => {
+      navLeft.classList.toggle("active");
+    });
+
+    navLeft.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", cerrarMenu);
+    });
+  }
+}

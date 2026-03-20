@@ -733,3 +733,41 @@ ol {
         gap: 10px;
     }
 }
+
+@media screen and (max-width: 768px) {
+    .nav-right {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav-right a {
+        white-space: nowrap;
+    }
+}
+
+/* ===== RESTORE METEO ORIGINAL ===== */
+@media screen and (max-width: 768px) {
+
+    .dato {
+        padding: 12px;
+    }
+
+    .dato-label {
+        font-size: 14px;
+    }
+
+    .dato-valor {
+        font-size: 15px;
+    }
+
+    .imagenes {
+        width: 40px;
+        height: 40px;
+    }
+
+    #grafico-contenedor canvas {
+        height: auto !important;
+    }
+}
