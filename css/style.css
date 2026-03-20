@@ -358,7 +358,7 @@ button:hover {
 
 .main {
     padding: 15px;
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -515,7 +515,7 @@ ol {
 
     /* Contenedor completo */
     #datosMeteorologicos {
-        width: 95%;
+        width: 100%;
         padding: 15px;
         margin: 0 auto 20px;
     }
@@ -582,7 +582,7 @@ ol {
 
     #grafico-contenedor canvas {
         width: 100% !important;
-        height: 500px !important;
+        height: 400px !important;
         /* más alto para que no se vea aplastado */
         display: block;
         /* evita espacios en blanco */
@@ -607,8 +607,8 @@ ol {
 @media screen and (max-width: 768px) {
 
     .modal-content {
-        width: 95%;
-        max-width: 95%;
+        width: 100%;
+        max-width: 100%;
         padding: 20px;
     }
 
