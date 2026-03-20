@@ -50,7 +50,6 @@ body {
     background: rgba(255, 235, 59, 0.2);
 }
 
-/* ================= SECCIÓN METEO ================= */
 #datosMeteorologicos {
     width: 100%;
     box-sizing: border-box;
@@ -85,11 +84,8 @@ body {
 
 /* Contenedor de los bloques de datos */
 #datos-meteo {
-    display: flex;
-    flex-wrap: wrap;
+    display: block;
     width: 100%;
-    justify-content: space-between;
-    gap: 10px;
 }
 
 /* Bloques individuales */
@@ -157,22 +153,64 @@ body {
     border-left-color: #4caf50;
 }
 
-/* Contenedor del gráfico */
+/* Contenedor de los bloques de datos dinámicos (Móvil usa este por defecto) */
+.datos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+#dato-fecha { flex: 1 1 100%; order: 1; margin-bottom: 5px; }
+#dato-temperatura { flex: 1 1 calc(50% - 15px); order: 2; margin-bottom: 5px; }
+#dato-humedad { flex: 1 1 calc(50% - 15px); order: 3; margin-bottom: 5px; }
+#dato-viento { flex: 1 1 calc(50% - 15px); order: 4; margin-bottom: 5px; }
+#dato-lluvia { flex: 1 1 calc(50% - 15px); order: 5; margin-bottom: 5px; }
+
+/* TABLET Y ESCRITORIO (> 768px): Todo en una fila */
+@media screen and (min-width: 769px) {
+    .datos {
+        flex-wrap: nowrap;
+    }
+    #dato-fecha,
+    #dato-temperatura,
+    #dato-humedad,
+    #dato-viento,
+    #dato-lluvia {
+        flex: 1 1 calc(20% - 15px) !important;
+        margin-bottom: 0 !important;
+        order: unset !important;
+    }
+}
+
+/* Contenedor del gráfico compartida */
 #grafico-contenedor {
     width: 100%;
-    max-width: 1000px;
-    /* límite para escritorio */
-    margin: 25px 0;
     background: white;
     padding: 15px;
     border-radius: 15px;
     box-sizing: border-box;
+    margin: 20px auto;
 }
 
-/* Canvas del gráfico */
+/* Canvas del gráfico base (móvil) */
 #grafico-contenedor canvas {
     width: 100% !important;
-    height: auto !important;
+    height: 400px !important;
+    display: block;
+}
+
+/* Gráfico Desktop/Tablet adaptativo */
+@media screen and (min-width: 769px) {
+    #grafico-contenedor {
+        max-width: 800px !important;
+        margin: 30px auto !important;
+    }
+    #grafico-contenedor canvas {
+        height: 320px !important;
+    }
 }
 
 /* Responsive */
@@ -278,83 +316,8 @@ button:hover {
     background: #4CAF50;
 }
 
-/* ================= RESPONSIVE ================= */
-
-/* Contenedor de los bloques de datos dinámicos */
-.datos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
-    gap: 10px;
-}
-
-/* Escritorio: fila única */
-@media (min-width: 1024px) {
-    .datos {
-        flex-wrap: nowrap;
-        flex-direction: row;
-    }
-
-    .dato {
-        flex: 1 1 18%;
-        margin: 0 5px;
-    }
-}
-
-/* Tablet: bloques más pequeños, flex-wrap para varias filas */
-@media (min-width: 600px) and (max-width: 1023px) {
-    .datos {
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    .dato {
-        flex: 1 1 45%;
-        margin-bottom: 15px;
-    }
-}
-
-/* Móvil: Fecha arriba y 2x2 debajo */
-@media (max-width: 599px) {
-    .datos {
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    #dato-fecha {
-        flex: 1 1 100%;
-        order: 1;
-        margin-bottom: 10px;
-    }
-
-    #dato-temperatura {
-        flex: 1 1 48%;
-        order: 2;
-        margin-bottom: 10px;
-    }
-
-    #dato-humedad {
-        flex: 1 1 48%;
-        order: 3;
-        margin-bottom: 10px;
-    }
-
-    #dato-viento {
-        flex: 1 1 48%;
-        order: 4;
-        margin-bottom: 10px;
-    }
-
-    #dato-lluvia {
-        flex: 1 1 48%;
-        order: 5;
-        margin-bottom: 10px;
-    }
-}
-
 /* =================== */
-/* ESTILOS PRINCIPALES */
+/* ESTILOS PRINCIPALES (CARDS) */
 /* =================== */
 
 .main {
@@ -366,13 +329,11 @@ button:hover {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 12px;
-    /* Espacio uniforme entre tarjetas */
 }
 
 .card {
     padding: 10px;
-    flex: 1 1 calc(33% - 12px);
-    /* 3 tarjetas por fila en desktop */
+    flex: 1 1 calc(33.333% - 12px);
     max-width: 400px;
     border-radius: 0.5rem;
     background-color: #f8f8f8;
@@ -400,11 +361,9 @@ button:hover {
 
 .image img {
     object-fit: contain;
-    /* evita recorte */
     width: 100%;
     height: auto;
     max-height: 180px;
-    /* altura compacta */
     border-radius: 0.3rem;
     background-color: #f8f8f8;
 }
@@ -464,182 +423,16 @@ ol {
     line-height: 1.3rem;
 }
 
-
-/* =================== */
-/* ESTILOS RESPONSIVOS PARA MÓVIL */
-/* =================== */
-@media screen and (max-width: 768px) {
-    .main {
-        flex-direction: column;
-        padding: 10px;
-        gap: 8px;
-    }
-
-    .card {
-        flex: 1 1 100%;
-        max-width: 100%;
-        padding: 8px;
-        margin-bottom: 8px;
-    }
-
-    .image img {
-        max-height: 140px;
-    }
-
-    .title {
-        font-size: 1rem;
-        line-height: 1.3rem;
-    }
-
-    .desc {
-        font-size: 0.8rem;
-        line-height: 1.2rem;
-    }
-
-    .action {
-        font-size: 0.7rem;
-        padding: 3px 6px;
-    }
-
-    .desc ul,
-    .desc ol {
-        font-size: 0.8rem;
-        line-height: 1.2rem;
-    }
-}
-
-/*ESTILO DEL MENÚ PARA MÓVIL*/
-/* SOLO MÓVIL */
 /* ========================= */
-/* SECCIÓN METEOROLÓGICA MÓVIL */
+/* MENÚ HAMBURGUESA BÁSICO */
 /* ========================= */
-@media screen and (max-width: 1024px) {
 
-    /* Contenedor completo */
-    #datosMeteorologicos {
-        width: 100%;
-        padding: 15px;
-        margin: 0 auto 20px;
-    }
-
-    /* Títulos */
-    #titulo-estacion {
-        font-size: 28px;
-        font-weight: 700;
-        text-align: center;
-        margin-bottom: 15px;
-    }
-
-    #titulo-estacion .subtitulo {
-        font-size: 20px;
-        margin-bottom: 20px;
-    }
-
-    /* Selects más grandes */
-    .selector {
-        font-size: 18px;
-        padding: 12px 15px;
-        border-radius: 8px;
-        max-width: 100%;
-        margin-bottom: 20px;
-    }
-
-    /* Bloques de datos */
-    .datos {
-        gap: 10px;
-    }
-
-    .dato {
-        padding: 15px;
-        min-width: 48%;
-        text-align: center;
-    }
-
-    .dato-label {
-        font-size: 14px;
-        font-weight: 600;
-    }
-
-    .dato-valor {
-        font-size: 16px;
-        font-weight: 700;
-    }
-
-    .imagenes {
-        width: 40px;
-        height: 40px;
-        margin-bottom: 8px;
-    }
-
-    /* GRÁFICO RESPONSIVE */
-    #grafico-contenedor {
-        width: 100% !important;
-        /* ancho completo */
-        max-width: 100% !important;
-        /* evitar límites de tamaño */
-        padding: 15px;
-        margin: 20px auto;
-        box-sizing: border-box;
-    }
-
-    #grafico-contenedor canvas {
-        width: 100% !important;
-        height: 400px !important;
-        /* más alto para que no se vea aplastado */
-        display: block;
-        /* evita espacios en blanco */
-    }
-
-    /* Ajuste de navbar y cabecera: evitar espacio blanco */
-    .navbar {
-        flex-wrap: nowrap;
-        /* evita que el contenido baje a otra línea */
-        justify-content: space-between;
-        padding: 8px 5px;
-    }
-
-    .nav-left,
-    .nav-right {
-        gap: 4px;
-        flex-wrap: nowrap;
-        align-items: center;
-    }
-    
-    .separador {
-        color: #FAFAFA;
-        font-size: 13px;
-        margin: 0 -2px;
-        user-select: none;
-    }
-}
-
-/* ===== FIX MODALES MÓVIL ===== */
-@media screen and (max-width: 768px) {
-
-    .modal-content {
-        width: 100%;
-        max-width: 100%;
-        padding: 20px;
-    }
-
-    .modal-content h3 {
-        font-size: 22px;
-    }
-
-    input {
-        font-size: 16px;
-        padding: 14px;
-    }
-
-    button {
-        font-size: 16px;
-        padding: 14px;
-    }
-
-    .input-eye img {
-        width: 26px;
-        right: 10px;
-    }
+.menu-toggle {
+    display: none;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+    margin-left: auto;
 }
 
 /* BOTÓN CERRAR (X) */
@@ -653,73 +446,94 @@ ol {
     cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
+/* ========================================= */
+/* RESPONSIVE: TABLET (769px - 1024px)       */
+/* ========================================= */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
     .main {
-        flex-direction: column;
-        padding: 10px;
-        gap: 12px;
+        gap: 15px;
     }
-
     .card {
-        flex: 1 1 100%;
-        max-width: 100%;
-        padding: 12px;
-    }
-
-    .title {
-        font-size: 1.3rem;
-        line-height: 1.5rem;
-    }
-
-    .desc {
-        font-size: 1rem;
-        line-height: 1.5rem;
-    }
-
-    .action {
-        font-size: 0.9rem;
-        padding: 6px 10px;
-    }
-
-    ul,
-    ol {
-        font-size: 1rem;
+        flex: 1 1 calc(50% - 15px);
+        max-width: 50%;
     }
 }
 
-@media screen and (max-width: 768px) {
-
-    .nav-left,
-    .nav-right {
-        gap: 10px;
+/* ========================================= */
+/* RESPONSIVE COMMON TABLET/MOBILE (< 1024px) */
+/* ========================================= */
+@media screen and (max-width: 1024px) {
+    /* Ajustes generales Meteo Compartidos */
+    #datosMeteorologicos {
+        width: 100%;
+        padding: 15px;
+        margin: 0 auto 20px;
     }
 
-    .nav-left a,
+    #titulo-estacion {
+        font-size: 28px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    #titulo-estacion .subtitulo {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .selector {
+        font-size: 18px;
+        padding: 12px 15px;
+        border-radius: 8px;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .dato {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .dato-label { font-size: 14px; font-weight: 600; }
+    .dato-valor { font-size: 16px; font-weight: 700; }
+    .imagenes { width: 40px; height: 40px; margin-bottom: 8px; }
+
+}
+
+/* ========================================= */
+/* RESPONSIVE: MÓVIL (<= 768px)              */
+/* ========================================= */
+@media screen and (max-width: 768px) {
+    /* Navegación */
+    .navbar {
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        padding: 8px 5px;
+    }
+    .nav-left, .nav-right {
+        gap: 4px;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+    .nav-right {
+        display: flex;
+        flex-direction: row;
+    }
     .nav-right a {
         font-size: 12px;
-        padding: 4px 4px;
+        padding: 4px;
+        white-space: nowrap;
     }
-}
-
-/* ========================= */
-/* MENÚ HAMBURGUESA */
-/* ========================= */
-
-.menu-toggle {
-    display: none;
-    font-size: 28px;
-    color: white;
-    cursor: pointer;
-    margin-left: auto;
-}
-
-/* MÓVIL */
-@media screen and (max-width: 768px) {
-
+    .separador {
+        color: #FAFAFA;
+        font-size: 13px;
+        margin: 0 -2px;
+        user-select: none;
+    }
     .menu-toggle {
         display: block;
     }
-
     .nav-left {
         position: absolute;
         top: 70px;
@@ -731,31 +545,40 @@ ol {
         padding: 15px;
         display: none;
     }
-
     .nav-left.active {
         display: flex;
     }
-
     .nav-left a {
         width: 100%;
         padding: 10px 0;
         font-size: 16px;
     }
 
-    .nav-right {
-        gap: 10px;
+    /* Modales */
+    .modal-content {
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
     }
-}
+    .modal-content h3 { font-size: 22px; }
+    input { font-size: 16px; padding: 14px; }
+    button { font-size: 16px; padding: 14px; }
+    .input-eye img { width: 26px; right: 10px; }
 
-@media screen and (max-width: 768px) {
-    .nav-right {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 10px;
+    /* Tarjetas principales */
+    .main {
+        flex-direction: column;
+        padding: 10px;
+        gap: 12px;
     }
-
-    .nav-right a {
-        white-space: nowrap;
+    .card {
+        flex: 1 1 100%;
+        max-width: 100%;
+        padding: 12px;
     }
+    .image img { max-height: 140px; }
+    .title { font-size: 1.3rem; line-height: 1.5rem; }
+    .desc { font-size: 1rem; line-height: 1.5rem; }
+    .action { font-size: 0.9rem; padding: 6px 10px; }
+    ul, ol { font-size: 1rem; }
 }
