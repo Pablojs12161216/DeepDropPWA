@@ -563,6 +563,9 @@ ol {
 /* ========================================= */
 @media screen and (max-width: 768px) {
     /* Navegación */
+    .logo img {
+        height: 35px;
+    }
     .navbar {
         flex-wrap: nowrap;
         justify-content: space-between;

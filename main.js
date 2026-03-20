@@ -18,6 +18,7 @@ function actualizarNavbar() {
   if (userId) {
     navRight.innerHTML = `
       <span class="user-name">Hola, ${nombre}</span>
+      <span id="themeToggleBtn" style="cursor: pointer; font-size: 20px; margin: 0 10px; user-select: none;">🌙</span>
       <div class="menu-toggle" id="menuToggle">&#9776;</div>
     `;
     datosSensoresBtn.style.visibility = "visible";
@@ -40,11 +41,50 @@ function actualizarNavbar() {
       <a id="botonIniciarSesion">Iniciar sesión</a>
       <span class="separador">|</span>
       <a id="botonRegistrarse">Registrarse</a>
+      <span id="themeToggleBtn" style="cursor: pointer; font-size: 20px; margin: 0 10px; user-select: none;">🌙</span>
     `;
     document.getElementById("botonIniciarSesion").addEventListener("click", () => modalLogin.classList.add("show"));
     document.getElementById("botonRegistrarse").addEventListener("click", () => modalSignup.classList.add("show"));
   }
   
+  // Handle theme
+  const themeBtn = document.getElementById("themeToggleBtn");
+  if (themeBtn) {
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark-mode");
+      themeBtn.textContent = "☀️";
+    }
+    themeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      const isDark = document.body.classList.contains("dark-mode");
+      
+      if (isDark) {
+        localStorage.setItem("theme", "dark");
+        themeBtn.textContent = "☀️";
+      } else {
+        localStorage.setItem("theme", "light");
+        themeBtn.textContent = "🌙";
+      }
+      
+      if (typeof grafico !== 'undefined' && grafico !== null) {
+        const textColor = isDark ? "#ffffff" : "#666666";
+        const gridColor = isDark ? "#444444" : "#cccccc";
+        
+        grafico.options.plugins.legend.labels.color = textColor;
+        grafico.options.scales.x.ticks.color = textColor;
+        grafico.options.scales.x.grid.color = gridColor;
+        grafico.options.scales.y.ticks.color = textColor;
+        grafico.options.scales.y.grid.color = gridColor;
+        
+        const dataset = grafico.data.datasets[0];
+        dataset.pointBackgroundColor = isDark ? "#ffffff" : "#000000";
+        dataset.pointBorderColor = isDark ? "#ffffff" : "#000000";
+        
+        grafico.update();
+      }
+    });
+  }
+
   if (typeof activarMenu === 'function') {
     activarMenu();
   }
@@ -197,6 +237,11 @@ function mostrarGrafico(data, tipo, label, color) {
   const labels = dataset.map(d => d.fecha_hora.slice(11, 16));
   const valores = dataset.map(d => d.valor);
   if (grafico) grafico.destroy();
+  
+  const isDark = document.body.classList.contains("dark-mode");
+  const textColor = isDark ? "#ffffff" : "#666666";
+  const gridColor = isDark ? "#444444" : "#cccccc";
+  const ptColor = isDark ? "#ffffff" : "#000000";
 
   grafico = new Chart(canvas, {
     type: "line",
@@ -207,30 +252,35 @@ function mostrarGrafico(data, tipo, label, color) {
         data: valores,
         borderColor: color,
         backgroundColor: color + "33",
+        pointBackgroundColor: ptColor,
+        pointBorderColor: ptColor,
         tension: 0.3,
-        pointRadius: 4,     // tamaño visual de los puntos más estético
-        pointHoverRadius: 6,  // un poco más grandes al pasar el ratón
-        pointHitRadius: 20   // área invisible enorme para detectar toques en móvil
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        pointHitRadius: 20
       }]
     },
     options: {
       responsive: true,
-      maintainAspectRatio: false, // usa altura CSS
+      maintainAspectRatio: false,
       interaction: {
-        mode: 'nearest',        // detectar el punto más cercano
+        mode: 'nearest',
         axis: 'x',
-        intersect: true         // tooltip solo al tocar el punto exacto
+        intersect: true
       },
       plugins: {
         legend: {
           display: true,
-          labels: { font: { size: 14 } } // leyenda normal
+          labels: { 
+            color: textColor,
+            font: { size: 14 } 
+          }
         },
         tooltip: {
           enabled: true,
           mode: 'nearest',
           intersect: true,
-          bodyFont: { size: 14 },  // texto normal
+          bodyFont: { size: 14 },
           titleFont: { size: 14 },
           padding: 10
         }
@@ -238,10 +288,12 @@ function mostrarGrafico(data, tipo, label, color) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { size: 14 } } // números eje Y normales
+          grid: { color: gridColor },
+          ticks: { color: textColor, font: { size: 14 } }
         },
         x: {
-          ticks: { font: { size: 14 } } // números eje X normales
+          grid: { color: gridColor },
+          ticks: { color: textColor, font: { size: 14 } }
         }
       }
     }
