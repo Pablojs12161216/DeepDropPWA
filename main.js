@@ -219,24 +219,24 @@ function mostrarGrafico(data, tipo, label, color) {
       plugins: {
         legend: {
           display: true,
-          labels: { font: { size: 18 } } // leyenda más grande
+          labels: { font: { size: 14 } } // leyenda normal
         },
         tooltip: {
           enabled: true,
           mode: 'nearest',
           intersect: true,
-          bodyFont: { size: 18 },  // texto tooltip grande
-          titleFont: { size: 18 },
-          padding: 12
+          bodyFont: { size: 14 },  // texto normal
+          titleFont: { size: 14 },
+          padding: 10
         }
       },
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { size: 18 } } // números eje Y más grandes
+          ticks: { font: { size: 14 } } // números eje Y normales
         },
         x: {
-          ticks: { font: { size: 18 } } // números eje X más grandes
+          ticks: { font: { size: 14 } } // números eje X normales
         }
       }
     }
