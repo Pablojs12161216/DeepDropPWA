@@ -341,6 +341,7 @@ function actualizarUI() {
       <a href="#" id="cerrarSesion">Cerrar sesión</a>
     `;
     datosBtn.style.display = "inline-block";
+    datosSensoresBtn.style.display = "visible";
     document.getElementById("cerrarSesion").addEventListener("click", (e) => {
       e.preventDefault();
       localStorage.removeItem("user_id");
