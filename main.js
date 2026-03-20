@@ -18,14 +18,23 @@ function actualizarNavbar() {
   if (userId) {
     navRight.innerHTML = `
       <span>Hola, ${nombre}</span>
-      <a href="#" id="cerrarSesionBtn">Cerrar sesión</a>
+      <div class="menu-toggle" id="menuToggle">☰</div>
     `;
     datosSensoresBtn.style.visibility = "visible";
-    document.getElementById("cerrarSesionBtn").addEventListener("click", () => {
-      localStorage.removeItem("user_id");
-      localStorage.removeItem("user_nombre");
-      location.reload();
-    });
+
+// 👇 AÑADIR ESTO
+if (!document.getElementById("cerrarSesionMenu")) {
+  const logout = document.createElement("a");
+  logout.id = "cerrarSesionMenu";
+  logout.textContent = "Cerrar sesión";
+  document.querySelector(".nav-left").appendChild(logout);
+
+  logout.addEventListener("click", () => {
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("user_nombre");
+    location.reload();
+  });
+}
   } else {
     navRight.innerHTML = `
       <a id="botonIniciarSesion">Iniciar sesión</a>
@@ -330,43 +339,44 @@ signupBtn.addEventListener("click", function () {
 /* ========================= */
 function actualizarUI() {
   function actualizarUI() {
-  const userNombre = localStorage.getItem("user_nombre");
-  const navRight = document.querySelector(".nav-right");
+    const userNombre = localStorage.getItem("user_nombre");
+    const navRight = document.querySelector(".nav-right");
 
-  if (contenidoPrincipal) contenidoPrincipal.style.display = "block";
+    if (contenidoPrincipal) contenidoPrincipal.style.display = "block";
 
-  if (userNombre) {
-    navRight.innerHTML = `
+    if (userNombre) {
+      navRight.innerHTML = `
       <span>Hola, ${userNombre}</span> |
       <a href="#" id="cerrarSesion">Cerrar sesión</a>
     `;
 
-    datosBtn.style.display = "inline-block";
-    datosSensoresBtn.style.visibility = "visible"; // ✅ FIX
+      datosBtn.style.display = "inline-block";
+      datosSensoresBtn.style.visibility = "visible"; // ✅ FIX
 
-    document.getElementById("cerrarSesion").addEventListener("click", (e) => {
-      e.preventDefault();
-      localStorage.removeItem("user_id");
-      localStorage.removeItem("user_nombre");
-      location.reload();
-    });
+      document.getElementById("cerrarSesion").addEventListener("click", (e) => {
+        e.preventDefault();
+        localStorage.removeItem("user_id");
+        localStorage.removeItem("user_nombre");
+        location.reload();
+      });
 
-    datosDiv.style.display = "none";
+      datosDiv.style.display = "none";
 
-  } else {
-    navRight.innerHTML = `
+    } else {
+      navRight.innerHTML = `
       <a id="botonIniciarSesion">Iniciar sesión</a> |
       <a id="botonRegistrarse">Registrarse</a>
     `;
 
-    datosBtn.style.display = "none";
-    datosSensoresBtn.style.visibility = "hidden";
-    datosDiv.style.display = "none";
+      datosBtn.style.display = "none";
+      datosSensoresBtn.style.visibility = "hidden";
+      datosDiv.style.display = "none";
 
-    document.getElementById("botonIniciarSesion").onclick = () => modalLogin.classList.add("show");
-    document.getElementById("botonRegistrarse").onclick = () => modalSignup.classList.add("show");
+      document.getElementById("botonIniciarSesion").onclick = () => modalLogin.classList.add("show");
+      document.getElementById("botonRegistrarse").onclick = () => modalSignup.classList.add("show");
+    }
   }
-}}
+}
 
 actualizarUI();
 
@@ -419,15 +429,15 @@ if ('serviceWorker' in navigator) {
 /* MENÚ HAMBURGUESA */
 /* ========================= */
 
-const menuToggle = document.getElementById("menuToggle");
-const navLeft = document.querySelector(".nav-left");
+function activarMenu() {
+  const menuToggle = document.getElementById("menuToggle");
+  const navLeft = document.querySelector(".nav-left");
 
-menuToggle.addEventListener("click", () => {
-  navLeft.classList.toggle("active");
-});
+  if (menuToggle) {
+    menuToggle.addEventListener("click", () => {
+      navLeft.classList.toggle("active");
+    });
+  }
+}
 
-document.querySelectorAll(".nav-left a").forEach(link => {
-  link.addEventListener("click", () => {
-    navLeft.classList.remove("active");
-  });
-});
+activarMenu();
